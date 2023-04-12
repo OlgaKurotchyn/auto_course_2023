@@ -1,4 +1,5 @@
 def foo ()=
 pass
-def foo2 ():
+
+def foo1 ():
     pass
