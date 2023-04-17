@@ -19,3 +19,4 @@ def test_http_request():
 
 def test_ui_POM():
     print(CONFIG.get("BASE_URL_UI"))
+
