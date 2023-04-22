@@ -1,5 +1,10 @@
 import pytest
 
+
+from src.applications.api.github_api_client import GitHubApiClient
+from src.config.config import CONFIG
+
+
 class User:
     def __init__(self, age) -> None:
         # database interacton
@@ -12,13 +17,23 @@ class User:
 
 @pytest.fixture(scope="session")
 def user():
-    #before test
+    # before test
     print("Create user")
     user = User(42)
 
     # pass user object to test
     yield user
-        
-    #after test
+
+    # after test
     print("Remove user")
     user.remove()
+
+
+@pytest.fixture
+def github_api_client():
+    github_api_client = GitHubApiClient()
+    github_api_client.login(CONFIG.get("USERNAME"), CONFIG.get("PASSWORD"))
+
+    yield github_api_client
+
+    github_api_client.logout()

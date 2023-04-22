@@ -2,6 +2,7 @@ import os
 
 from src.config.providers.config_from_env_provider import ConfigFromEnvProvider
 from src.config.providers.config_from_json_provider import ConfigFromSimpleJsonProvider
+from src.config.providers.config_from_defults_provider import ConfigFromDefaultsProvider
 
 
 class Config:
@@ -20,13 +21,20 @@ class Config:
         self.providers = [
             ConfigFromSimpleJsonProvider(json_path),
             ConfigFromEnvProvider(),
-            ]
+            ConfigFromDefaultsProvider({
+                "DEBUG_MODE": True,
+                "BROWSER": 'chrome',
+                "UI_TIMEOUTS": 30,
+            })
+        ]
 
-                 
         self.register("BASE_URL_API")
         self.register("BASE_URL_UI")
         self.register("USERNAME")
         self.register("PASSWORD")
+        self.register("BROWSER")
+        self.register("DEBUG_MODE")
+        self.register("UI_TIMEOUTS")
 
     def register(self, name):
         """
@@ -43,7 +51,7 @@ class Config:
 
         # raise error if no value is found across the providers
         val = self.conf_dict.get(name)
-        if val is None:    
+        if val is None:
             raise Exception(f"{name} variable is not set in config")
 
         print(f"{name} variable is registered in config with value {val}")
@@ -53,7 +61,7 @@ class Config:
         Return existing value
         """
         val = self.conf_dict.get(name)
-        if val is None:    
+        if val is None:
             raise Exception(f"{name} variable is not set in config")
 
         return self.conf_dict.get(name)
