@@ -1,17 +1,18 @@
 import pytest
 
-
 from src.applications.api.github_api_client import GitHubApiClient
 from src.config.config import CONFIG
+from src.applications.ui.github_ui_app import GitHubUI
+from src.providers.service.browsers.browsers_provider import BrowsersProvider
 
 
 class User:
     def __init__(self, age) -> None:
-        # database interacton
+        # datadabase interaction
         self.age = age
 
     def remove(self):
-        # database iteraction
+        # database interaction
         self.age = None
 
 
@@ -37,3 +38,15 @@ def github_api_client():
     yield github_api_client
 
     github_api_client.logout()
+
+
+@pytest.fixture
+def github_ui_app():
+    browser = CONFIG.get("BROWSER")
+    driver = BrowsersProvider.get_driver(browser)
+
+    ui_app = GitHubUI(driver)
+
+    yield ui_app
+
+    ui_app.quit()

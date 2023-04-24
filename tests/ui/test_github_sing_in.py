@@ -1,20 +1,22 @@
 import pytest
-
+from selenium import webdriver
 from src.applications.ui.github_ui_app import GitHubUI
 
 
 @pytest.fixture
 def browser():
-    browser = GitHubUI()
+    driver = webdriver.Chrome()
+    browser = GitHubUI(driver)
 
-    browser.launch()
+    browser.open()
 
     yield browser
 
-    browser.close()
+    browser.quit()
 
 
 def test_failed_login(browser):
+
     browser.go_to_login_page()
     browser.try_login_on_login_page()
 
