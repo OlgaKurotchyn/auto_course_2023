@@ -1,7 +1,7 @@
 from src.config.config import CONFIG
 
 
-def test_search_repo ():
+def test_search_repo():
     assert 1 == 1
 
 
@@ -15,8 +15,3 @@ def test_user_age_is_50(user):
 
 def test_http_request():
     print(CONFIG.get("BASE_URL_API"))
-
-
-def test_ui_POM():
-    print(CONFIG.get("BASE_URL_UI"))
-

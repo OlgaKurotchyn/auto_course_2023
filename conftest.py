@@ -40,7 +40,7 @@ def github_api_client():
     github_api_client.logout()
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def github_ui_app():
     browser = CONFIG.get("BROWSER")
     driver = BrowsersProvider.get_driver(browser)

@@ -26,6 +26,14 @@ class GitHubApiClient:
         #
         self.token = "sdkfjbkjsdf"
 
+
+    def sign_up_page(self, email):
+        print(f"Do login with {email}")
+        #
+        # DO LOGIN REQUEST
+        #
+        self.token = "sdkfjbkjsdf5"
+
     def logout(self):
         print("Do logout for")
 
