@@ -9,7 +9,7 @@ def test_user_age_is_42(user):
 
 class TestGitHubAPI(unittest.TestCase):
 
-    def test_search_repositories(self):
+    def test_search_repo(self):
         body = "become"
         url = f"https://api.github.com/search/repositories?q={body}"
         response = requests.get(url)
@@ -21,7 +21,7 @@ class TestGitHubAPI(unittest.TestCase):
         self.assertTrue(total_count > 0)
 
 
-def test_search_repositories():
+def test_search_repo():
     body = "become"
     url = f"https://api.github.com/search/repositories?q={body}"
     response = requests.get(url)
@@ -31,7 +31,7 @@ def test_search_repositories():
     assert response.json()["total_count"] > 0
 
 
-def test_search_repositories_not_found():
+def test_search_repo_not_found():
     body = str(uuid.uuid4())  # Generate a random UUID string
     url = f"https://api.github.com/search/repositories?q={body}"
     response = requests.get(url)
@@ -41,7 +41,7 @@ def test_search_repositories_not_found():
     assert response.json()["total_count"] == 0
 
 
-def test_search_repositories_without_q_param():
+def test_search_repo_without_q_param():
     url = "https://api.github.com/search/repositories"
     response = requests.get(url)
 
@@ -50,7 +50,7 @@ def test_search_repositories_without_q_param():
     assert response.json()["message"] == "Validation Failed"
 
 
-def test_search_repositories_without_q():
+def test_search_repo_without_q():
     body = requests.get(
         url="https://api.github.com/search/repositories"
     )
