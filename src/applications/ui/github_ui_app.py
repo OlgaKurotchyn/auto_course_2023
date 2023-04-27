@@ -11,7 +11,7 @@ class GitHubUI(BaseAPP):
         super().__init__(driver)
         self.LoginPage = LoginPage(self)
         self.SignUpPage = SignUpPage(self)
-        self.SignUpPage = Sign_up_Page(self)
+        self.Sign_up_Page = Sign_up_Page(self)
 
     def open(self):
         self.driver.get(CONFIG.get("BASE_URL_UI"))
